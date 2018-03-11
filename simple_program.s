@@ -41,7 +41,7 @@ RL_Scroll_Loop:
 	br Delay_RL
 
 TOGGLE:
-xori r16, r16, 1
+xori r16, r16, 1 #in a way r16 is the mode.
 movia r12, 0x0
 br toggle_delay
 toggled_bounced:
@@ -54,6 +54,9 @@ addi r12, r12, 1
 beq r12, r18, toggled_bounced
 bne	r12, r18, toggle_delay
 
+choose_mode:
+beq r16, r14, RL_init
+beq r16, r0, LR_init
 
 Delay_RL:
 	addi r12, r12, 1
@@ -72,19 +75,19 @@ COUNT_1:
 	beq r2, r10, TOGGLE
 	ldwio r3, 0(r8)
 	beq r3, r14, COUNT_1
-br Delay_RL
+br choose_mode
 #you jackass you hard coded you prbolem in its right here and look on the count2
 # jfc you knew you already knew this. VVVVVVVV look below. 
 
-#come to a conclusion on how to better handle the bounce count.
+#come to a conclusion on how to better handle the bounce count. maybe instead of going back to the 
 
 COUNT_2:	
 	addi r2, r2, 1
 	beq r2, r10, TOGGLE
 	ldwio r3, 0(r8)
 	beq r3, r14, COUNT_2
-br Delay_RL #todo this is not going to work you need to send this to some control and act on it first.
-	
+br choose_mode #todo this is not going to work you need to send this to some control and act on it first.
+	#we want to go back to the last mode we were in.
 
 Delay_LR:
 	addi r12, r12, 1
