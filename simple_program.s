@@ -65,29 +65,26 @@ Delay_RL:
 	#ldwio r3, 0(r8) #read the button put into r3
 	movia r2, 0 #reset the debounce counter
 	ldwio r3, 0(r8) #READ THE BUTTON SWITCH
-	beq r3, r15, COUNT_2
-	beq r3, r14, COUNT_1
+	beq r3, r15, COUNT_2 #key 1
+	beq r3, r14, COUNT_1 #key 0
 	movia r2, 0#reset the count its bouncing!
 	br Delay_RL
 
-COUNT_1:
+COUNT_1: 
 	addi r2, r2, 1
 	beq r2, r10, TOGGLE
 	ldwio r3, 0(r8)
 	beq r3, r14, COUNT_1
 br choose_mode
 #you jackass you hard coded you prbolem in its right here and look on the count2
-# jfc you knew you already knew this. VVVVVVVV look below. 
 
-#come to a conclusion on how to better handle the bounce count. maybe instead of going back to the 
 
 COUNT_2:	
 	addi r2, r2, 1
 	beq r2, r10, TOGGLE
 	ldwio r3, 0(r8)
-	beq r3, r14, COUNT_2
+	beq r3, r15, COUNT_2 #remember buddy, r15 is the 0x02 state and for key 1, then r14 is 0x01 for key0 man what sleep can do for you.
 br choose_mode #todo this is not going to work you need to send this to some control and act on it first.
-	#we want to go back to the last mode we were in.
 
 Delay_LR:
 	addi r12, r12, 1
