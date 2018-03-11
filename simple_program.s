@@ -145,7 +145,7 @@ ScrollArrayRL:
 	#E, then pattern C from question 1: horizontal segments of display.
 
 ScrollArrayLR: 
-	.word 0x47,  0x49, 0x49, 0x49, 0x00,0x00, 0x00, 0x00,
+	.word 0x4F,  0x49, 0x49, 0x49, 0x00,0x00, 0x00, 0x00,
 	#mirror of the LR pattern, not sure if will work because it will change scroll but it will restart from scratch. 
 	#thats fine it says button press > "switch mode of display" I am saying that its design is to start with a blank screen. or not
 
